@@ -26,7 +26,10 @@ Route::post('test', function(){
 
 // Read an item
 Route::get('test', function(){
-
+    echo '<form action="test" method="POST">';
+    echo '<input type="submit">';
+    echo '<input type="hidden" value="' . csrf_token() . '" name="_token">';
+    echo '</from>';
 });
 
 // Update an item
