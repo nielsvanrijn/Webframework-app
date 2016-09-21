@@ -15,31 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('hello/{name}', function($name){
-    echo 'Hello '. $name;
+Route::get('moderator/{id}', function($id){
+    $moderator = App\Moderator::find($id);
+    echo $moderator->name;
 });
 
-// Create an item
-Route::post('test', function(){
-    echo 'We just created an item';
+Route::get('moderator_name', function(){
+    $moderator = App\Moderator::where('name', '=', 'Antwan')->first();
+    echo $moderator->id;
 });
-
-// Read an item
-Route::get('test', function(){
-    echo '<form action="test" method="POST">';
-    echo '<input type="submit">';
-    echo '<input type="hidden" value="' . csrf_token() . '" name="_token">';
-    echo '<input type="hidden" name="_method" value="DELETE">';
-    echo '</from>';
-});
-
-// Update an item
-Route::put('test', function(){
-    echo 'We just updated an item';
-});
-
-// Delete an item
-Route::delete('test', function(){
-    echo 'We just deleted an item';
-});
-
