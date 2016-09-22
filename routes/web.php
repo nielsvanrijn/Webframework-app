@@ -15,12 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('moderator/{id}', function($id){
-    $moderator = App\Moderator::find($id);
-    echo $moderator->name;
-});
+Auth::routes();
 
-Route::get('moderator_name', function(){
-    $moderator = App\Moderator::where('name', '=', 'Antwan')->first();
-    echo $moderator->id;
-});
+Route::get('/home', 'HomeController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
