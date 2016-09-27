@@ -11,11 +11,13 @@
 |
 */
 
-Route::get('/', 'MovieController@movie');
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'MovieController@movie');
+
+Route::get('home', 'HomeController@index');
 
 Route::get('profile', 'UserController@profile');
 Route::post('profile', 'UserController@update_avatar');
+
+Route::post('home/help-centre/category/{category_id}/section/{section_id}/article/sort-order');
