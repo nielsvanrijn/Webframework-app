@@ -14,10 +14,12 @@
 Auth::routes();
 
 // index
-Route::get('/', 'MovieController@movie');
+Route::get('/', 'MovieController@index');
 
 // movies sort
-Route::get('/sort', 'MovieController@sort');
+Route::post('/sort_default', 'MovieController@sort_default');
+Route::post('/sort_title', 'MovieController@sort_title');
+Route::post('/sort_year', 'MovieController@sort_year');
 
 Route::get('/home', 'HomeController@index');
 

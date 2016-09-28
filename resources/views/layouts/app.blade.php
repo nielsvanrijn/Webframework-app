@@ -86,5 +86,7 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    <script src="js/ajax-sort.js"></script>
+
 </body>
 </html>

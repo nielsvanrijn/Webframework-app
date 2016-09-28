@@ -41,7 +41,7 @@
 }
 #sortbar ul button:hover{background: lightgrey; color: #1f648b}
 
-#movie_list{
+#movie_item{
     width: 200px;
     height: 350px;
     margin:0 10px 0 10px;
@@ -49,10 +49,10 @@
     float: left;
     border-radius: 10px;
 }
-#movie_list:first-of-type{
+#movie_item:first-of-type{
     margin: 0 10px 0 0;
 }
-#movie_list:last-of-type{
+#movie_item:last-of-type{
     margin: 0 0 0 10px;
 }
 
