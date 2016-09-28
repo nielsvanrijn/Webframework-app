@@ -12,10 +12,6 @@ use Auth;
 class MovieController extends Controller
 {
     public function movie(){
-        return view('index', array('movies' => Movie::all()) );
-    }
-
-    public function test(){
-        echo "test";
+        return view('index', array('movies' => Movie::orderBy('title', 'ASC')->get() ) );
     }
 }
