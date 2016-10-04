@@ -1,6 +1,7 @@
 @foreach($movies as $movie)
-    <div id="movie_item" style="background: #9d9d9d url('/uploads/avatars/{{ $movie->poster }}') no-repeat center / cover;">
-        <h4>{{ $movie->title }}</h4>
-        <h5>{{ $movie->year }}</h5>
+    <div class="movie_item">
+        <div class="movie_poster" style="background: #9d9d9d url('/uploads/posters/{{ $movie->poster }}') no-repeat center / cover;"><span><i class="fa fa-heart"></i> {{ $movie->rating }}<ins> / 10</ins></span></div>
+        <h5>{{ $movie->title }}</h5>
+        <h6>{{ $movie->year }}</h6>
     </div>
 @endforeach

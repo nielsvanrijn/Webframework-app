@@ -16,23 +16,23 @@ class MovieController extends Controller
         return view('index');
     }
 
-    //default list
+    //default movie list
     public function sort_default(){
-        return view('movies', array('movies' => Movie::orderBy('title', 'ASC')->get() ) );
+        //Load all movies by title ascending
+        $movies = Movie::orderBy('title', 'ASC')->get();
+
+        return view('movies', compact('movies') );
+    }
+    //dynamic sort
+    public function sort($what, $how, $genre){
+        //Get & sort all movies by variables
+        $movies = Movie::where('genre', 'LIKE', '%' . $genre . '%')->orderBy($what, $how)->get();
+
+        return view('movies', compact('movies'));
     }
 
-    //decending list
-    public function sort_title(){
-        return view('movies', array('movies' => Movie::orderBy('title', 'DESC')->get() ) );
-    }
-
-    //decending list
-    public function sort_year(){
-        return view('movies', array('movies' => Movie::orderBy('year', 'DESC')->get() ) );
-    }
-
-    //dynamic
-    public function sort(){
-        return view('movies', array('movies' => Movie::orderBy('year', 'DESC')->get() ) );
+    //add a movie
+    public function addmovie(){
+        return view('addmovie');
     }
 }

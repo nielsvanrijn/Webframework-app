@@ -13,16 +13,36 @@
 
 Auth::routes();
 
-// index
+// home
 Route::get('/', 'MovieController@index');
 
-// movies sort
-Route::post('/sort_default', 'MovieController@sort_default');
-Route::post('/sort_title', 'MovieController@sort_title');
-Route::post('/sort_year', 'MovieController@sort_year');
+// movies sort ajax only
+Route::group(['middleware' => ['ajax']], function(){
+    Route::get('/sort/default', 'MovieController@sort_default');
+    Route::get('/sort/{what}/{how}/{genre}', 'MovieController@sort');
+});
 
-Route::get('/home', 'HomeController@index');
+//LOGIN REQUIRED
+Route::group(['middleware' => ['auth']], function(){
 
-// profile
-Route::get('/profile', 'UserController@profile');
-Route::post('/profile', 'UserController@update_avatar');
+    // dasboard
+    Route::get('/dashboard', 'DashboardController@dash');
+
+    // profile
+    Route::get('/profile', 'UserController@profile');
+    Route::post('/profile', 'UserController@update_avatar');
+
+    Route::get('/addmovie', 'MovieController@addmovie');
+});
+
+//MODERATOR REQUIRED
+Route::group(['middleware' => ['mod']], function(){
+
+    Route::get('/mod', function(){echo "you have acces";});
+
+});
+
+//Catch anything that isn't listed
+Route::any('any', function(){
+    return view('404');
+});
