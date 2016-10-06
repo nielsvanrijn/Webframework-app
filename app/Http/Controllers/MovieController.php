@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-
 use App\Movie;
+use App\Http\Requests;
+use App\Http\Requests\CreateMovieRequest;
+use Illuminate\Http\Request;
 use Auth;
+use Image;
 
 class MovieController extends Controller
 {
@@ -31,8 +31,29 @@ class MovieController extends Controller
         return view('movies', compact('movies'));
     }
 
-    //add a movie
-    public function addmovie(){
+
+    /**
+     * Save a new movie
+     *
+     * @return Response
+     */
+    //show page
+    protected function moviecreate()
+    {
         return view('addmovie');
+    }
+
+    /**
+     * Save a new movie
+     *
+     * @param CreateMovieRequest $request
+     * @return Response
+     */
+    //add a movie
+    public function moviestore(CreateMovieRequest $request){
+
+        Movie::create($request->all());
+
+        return redirect('/');
     }
 }

@@ -113,3 +113,13 @@
     text-decoration: none;
     font: 0.8em Asap;
 }
+/* =============================================================================
+                                ADD MOVIE
+============================================================================= */
+#genre option{
+    float: left;
+    margin: 0 5px;
+}
+.form-group span{
+    font-weight: normal;
+}

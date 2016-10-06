@@ -32,7 +32,9 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/profile', 'UserController@profile');
     Route::post('/profile', 'UserController@update_avatar');
 
-    Route::get('/addmovie', 'MovieController@addmovie');
+    //add a movie
+    Route::get('/addmovie', 'MovieController@moviecreate');
+    Route::post('/addmovie', 'MovieController@moviestore');
 });
 
 //MODERATOR REQUIRED
