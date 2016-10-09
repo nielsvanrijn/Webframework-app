@@ -29,7 +29,7 @@ class CreateMovieRequest extends FormRequest
             'poster' => '',
             'duration' => '',
             'genre' => 'required',
-            'date' => '',
+            'date' => 'date',
             'director' => '',
             'stars' => '',
             'photos' => '',

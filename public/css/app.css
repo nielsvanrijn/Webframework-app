@@ -50,6 +50,7 @@
 #sortbar .generes li{
     padding: 0 1em 0 1em;
     transition-duration: 100ms;
+    cursor: pointer;
 }
 #sortbar .generes li:hover{
     background: #BBDEFB;

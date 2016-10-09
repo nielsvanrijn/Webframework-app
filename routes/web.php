@@ -19,8 +19,8 @@ Route::get('/', 'MovieController@index');
 // movies sort ajax only
 Route::group(['middleware' => ['ajax']], function(){
     Route::get('/sort/default', 'MovieController@sort_default');
-    Route::get('/sort/{what}/{how}/{genre}', 'MovieController@sort');
 });
+Route::get('/sort/{what}/{how}/{genre_id}', 'MovieController@sort');
 
 //LOGIN REQUIRED
 Route::group(['middleware' => ['auth']], function(){

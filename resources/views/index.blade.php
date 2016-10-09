@@ -12,29 +12,9 @@
                     <li class="dropdown">
                         <button class="dropdown-toggle" data-toggle="dropdown">Genre <i class="fa fa-caret-down"></i></button>
                         <ul class="generes dropdown-menu" role="menu">
-                            <li class="active ajax">All</li>
-                            <li class="ajax">Action</li>
-                            <li class="ajax">Adventure</li>
-                            <li class="ajax">Animation</li>
-                            <li class="ajax">Biography</li>
-                            <li class="ajax">Comedy</li>
-                            <li class="ajax">Crime</li>
-                            <li class="ajax">Documentary</li>
-                            <li class="ajax">Drama</li>
-                            <li class="ajax">Family</li>
-                            <li class="ajax">Fantasy</li>
-                            <li class="ajax">Film-Noir</li>
-                            <li class="ajax">History</li>
-                            <li class="ajax">Horror</li>
-                            <li class="ajax">Music</li>
-                            <li class="ajax">Musical</li>
-                            <li class="ajax">Mystery</li>
-                            <li class="ajax">Romance</li>
-                            <li class="ajax">Sci-Fi</li>
-                            <li class="ajax">Sport</li>
-                            <li class="ajax">Thriller</li>
-                            <li class="ajax">War</li>
-                            <li class="ajax">Western</li>
+                            @foreach(\App\Genres::all() as $genre)
+                                <li class="ajax" data-id="{{$genre->id}}">{{$genre->genre}}</li>
+                            @endforeach
                         </ul>
                     </li>
                 </ul>

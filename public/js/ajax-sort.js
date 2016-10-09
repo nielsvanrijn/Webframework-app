@@ -21,25 +21,26 @@ $(document).ready(function(){
 
     //ON CLICK get & sort year decending
     $('#sortbar').on('click', '.ajax',function(e){
-        var what = (e.target.outerText).slice(0,-1);
+        var what = (e.target.outerText).slice(0,-1).toLowerCase();
         var how = e.target.value;
-        var genre = (e.target.outerText);
-        if(genresave == "" && e.target.nodeName == "LI"){genresave = genre};
-        if(genresave == "" && e.target.nodeName == "BUTTON"){genresave = ","};
+        var $genre_id = (e.target.dataset.id);
+        if(genresave == "" && e.target.nodeName == "LI"){genresave = $genre_id};
+        if(genresave == "" && e.target.nodeName == "BUTTON"){genresave = 1};
 
-        if(e.target.nodeName == "BUTTON"){genre = ","};
+        if(e.target.nodeName == "BUTTON"){$genre_id = 1};
         if(e.target.nodeName == "LI"){
-            what = "title"; how = "ASC"; genresave = genre
+            what = "title"; how = "ASC"; genresave = $genre_id
             var test = $('li.active')[0]; $(test).removeClass('active');
             $(e.target).addClass('active');
         };
-        if(genresave == "All"){genresave = ","}
+        if(genresave == "All"){genresave = 1}
 
         console.log(
             "what " + what + "." + '\n' +
             "how " + how + '\n' +
-            "genre " + genre + "." + '\n' +
-            "genre save " + genresave
+            "genre " + $genre_id + "." + '\n' +
+            "genre save " + genresave + "." + '\n' +
+            url + what + "/" + how + "/" + genresave
         );
 
         $.ajax({

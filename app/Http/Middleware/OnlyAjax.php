@@ -16,7 +16,6 @@ class OnlyAjax
     public function handle($request, Closure $next)
     {
         if ( ! $request->ajax()){
-            echo "true";
             return redirect('/');
         }
 
