@@ -1,4 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);/*!
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');/*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -6,7 +7,7 @@
 /* =============================================================================
                                 OVERVIEW
 ============================================================================= */
-.loading {
+#overview .loading {
     background: rgba(255,255,255,0.9) url('../assets/loading.gif') no-repeat center 65%;
     height: 100px;
     width: 100px;
@@ -18,18 +19,18 @@
     z-index: 2000;
     display: none;
 }
-#sortbar{
+#overview #sortbar{
     width: 100%;
     height: 40px;
     margin: 0 0 1em 0;
     background: white;
     border: 1px solid lightgray;
 }
-#sortbar ul{
+#overview #sortbar ul{
     margin: 0;
     list-style: none;
 }
-#sortbar ul button{
+#overview #sortbar ul button{
     height: 38px;
     padding: 7px 14px 7px 14px;
     float: left;
@@ -38,53 +39,53 @@
     background: transparent;
     border: 0;
 }
-#sortbar ul button:hover{background: lightgrey; color: #1f648b}
-#sortbar ul button:focus{outline: 0}
-#sortbar ul li button i{pointer-events: none;}
-#sortbar .generes{
+#overview #sortbar ul button:hover{background: lightgrey; color: #1f648b}
+#overview #sortbar ul button:focus{outline: 0}
+#overview #sortbar ul li button i{pointer-events: none;}
+#overview #sortbar .generes{
     left: 23rem;
     top: 38px;
     min-width: inherit;
     padding: 0;
 }
-#sortbar .generes li{
+#overview #sortbar .generes li{
     padding: 0 1em 0 1em;
     transition-duration: 100ms;
     cursor: pointer;
 }
-#sortbar .generes li:hover{
+#overview #sortbar .generes li:hover{
     background: #BBDEFB;
     border-left: 4px solid cornflowerblue;
 }
-#sortbar .generes .active{
+#overview #sortbar .generes .active{
     color: #2196F3;
     border-left: 4px solid cornflowerblue;
 }
-#sortbar #addmovie{
+#overview #sortbar #addmovie{
     float: right;
     margin-right: 40px;
 }
 
-.movie_item{
+#overview .movie_item{
     width: 178px;
     height: 300px;
     margin:0 10px 0 10px;
     float: left;
 }
-.movie_item:first-of-type{margin: 0 10px 0 0;}
-.movie_item:nth-child(6){margin: 0 0 0 10px;}
-.movie_item:nth-child(7){margin: 0 10px 0 0;}
-.movie_item h5{margin: 5px 0 5px 0;}
-.movie_item h6{margin: 0 0 11px 0;}
+#overview .movie_item:first-of-type{margin: 0 10px 0 0;}
+#overview .movie_item:nth-child(6){margin: 0 0 0 10px;}
+#overview .movie_item:nth-child(7){margin: 0 10px 0 0;}
+#overview .movie_item h5{margin: 5px 0 5px 0;}
+#overview .movie_item h6{margin: 0 0 11px 0;}
 
-.movie_poster{
+#overview .movie_poster{
     width: 178px;
     height: 257px;
     border-radius: 10px;
 
     transition-duration: 150ms;
 }
-.movie_poster:hover{
+#overview .movie_poster:hover{
     -webkit-transform: translateY(2px);
     -moz-transform: translateY(2px);
     -ms-transform: translateY(2px);
@@ -95,7 +96,7 @@
     -moz-box-shadow: 0px 0px 5px rgba(0,0,0, 0.5);
     box-shadow: 0px 0px 20px rgba(0,0,0, 0.5);
 }
-.movie_poster span{
+#overview .movie_poster span{
     width: 178px;
     height: 257px;
     padding: 1em;
@@ -106,21 +107,31 @@
 
     transition-duration: 150ms;
 }
-.movie_poster:hover span{
+#overview .movie_poster:hover span{
     display: block;
     background: rgba(0,0,0, 0.4);
 }
-.movie_poster span ins{
+#overview .movie_poster span ins{
     text-decoration: none;
     font: 0.8em Asap;
 }
 /* =============================================================================
                                 ADD MOVIE
 ============================================================================= */
-#genre option{
+#addmovie #genre option{
     float: left;
     margin: 0 5px;
 }
-.form-group span{
+#addmovie .form-group span{
     font-weight: normal;
+}
+/* =============================================================================
+                                MOVIE DETAIL
+============================================================================= */
+#moviedetail h1{
+    font: bold 5em Montserrat;
+    text-transform: uppercase;
+}
+#moviedetail #ytplayer{
+    display: none;
 }

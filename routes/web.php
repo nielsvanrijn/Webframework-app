@@ -15,12 +15,13 @@ Auth::routes();
 
 // home
 Route::get('/', 'MovieController@index');
+Route::get('/detail/{movie_id}', 'MovieController@detail');
 
 // movies sort ajax only
 Route::group(['middleware' => ['ajax']], function(){
     Route::get('/sort/default', 'MovieController@sort_default');
+    Route::get('/sort/{what}/{how}/{genre_id}', 'MovieController@sort');
 });
-Route::get('/sort/{what}/{how}/{genre_id}', 'MovieController@sort');
 
 //LOGIN REQUIRED
 Route::group(['middleware' => ['auth']], function(){

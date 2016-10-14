@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Genres;
+use App\Genre;
 use App\Movie;
 use App\Http\Requests;
 use App\Http\Requests\CreateMovieRequest;
@@ -48,40 +48,51 @@ class MovieController extends Controller
         //call the previous function
         $movies = orderBy($movieCollection, $what, $how);
 
-        //return $what." ".$how." ".$genre_id;
         return view('movies', compact('movies'));
-
     }
 
-
-    /**
-     * Save a new movie
-     *
-     * @return Response
-     */
-    //show page
+    // SHOW ADDMOVIE FORM
     protected function moviecreate()
     {
         return view('addmovie');
     }
-
-    /**
-     * Save a new movie
-     *
-     * @param CreateMovieRequest $request
-     * @return Response
-     */
-//    add a movie
+    // STORE MOVIE IN DATABASE
     public function moviestore(CreateMovieRequest $request){
+        //return $request->all();
 
-        Movie::create($request->all());
+        $newmovie = new Movie();
+        $newmovie->title = $request->title;
+        $newmovie->year = $request->year;
+        $newmovie->duration = $request->duration;
+        $newmovie->date = $request->date;
+        $newmovie->director = $request->director;
+        $newmovie->stars = $request->stars;
+        if(!$request->trailer == ""){
+            $newmovie->trailer = $request->all();
+        }
+        $newmovie->storyline = $request->storyline;
 
+
+        if ($request->hasFile('poster')) {
+
+            $poster = $request->file('poster');
+            $filename = time() . '.' . $poster->getClientOriginalExtension();
+            Image::make($poster)->resize(178, 257)->save( public_path('/uploads/posters/' . $filename) );
+
+            $newmovie->poster = $filename;
+        }
+        $newmovie->save();
+
+        $newmovie->genres()->sync($request->genre);
         return redirect('/');
     }
-//    public function moviestore(Request $reqest){
-//
-//        $input = $reqest->all();
-//
-//        return $input;
-//    }
+
+    //MOVIE DETAIL
+    public function detail($movie_id){
+        $movie = Movie::where('id', '=', "$movie_id")->first();
+        $genre_id = Movie_Genre::where('movie_id', '=', $movie->id)->pluck('genre_id');
+
+        return view('detail', compact('movie', 'genre_id'));
+
+    }
 }

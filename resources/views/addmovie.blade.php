@@ -1,151 +1,136 @@
 @extends('layouts.app')
 
 @section('content')
+    <section id="addmovie">
     <div class="container">
         <div class="row">
             <h1>Add a movie</h1>
             <div class="panel-body">
-                <form class="form-horizontal" role="form" method="POST" action="{{ url('/addmovie') }}" enctype="multipart/form-data">
-                    {{ csrf_field() }}
-                    <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                        <label for="title" class="col-md-4 control-label">Title</label>
-                        <div class="col-md-6">
-                            <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" autofocus>
-                            @if ($errors->has('title'))
-                                <span class="help-block"><strong>{{ $errors->first('title') }}</strong></span>
-                            @endif
-                        </div>
-                    </div>
+                {{ Form::open(array('class' => 'form-horizontal', 'role' => 'form', 'method' => 'POST', 'action' => 'MovieController@moviestore', 'files' => true)) }}
 
-                    <div class="form-group{{ $errors->has('year') ? ' has-error' : '' }}">
-                        <label for="year" class="col-md-4 control-label">Year</label>
-                        <div class="col-md-6">
-                            <select id="year" class="form-control" name="year" value="{{date('Y')}}"></select>
-                            @if ($errors->has('year'))
-                                <span class="help-block"><strong>{{ $errors->first('year') }}</strong></span>
-                            @endif
-                        </div>
+                {{--TITLE--}}
+                <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
+                    {!! Form::label('title', 'Title', ['class' => 'col-md-4 control-label']) !!}
+                    <div class="col-sm-6">
+                        {!! Form::text('title', 'Title', ['class' => 'form-control', 'id'=>'title', 'autofocus'=>'autofocus']) !!}
+                        @if ($errors->has('title'))
+                            <span class="help-block"><strong>{{ $errors->first('title') }}</strong></span>
+                        @endif
                     </div>
+                </div>
 
-                    <div class="form-group{{ $errors->has('poster') ? ' has-error' : '' }}">
-                        <label for="poster" class="col-md-4 control-label">Poster image</label>
-                        <div class="col-md-6">
-                            <input id="poster" type="file" class="form-control" name="poster">
-                            @if ($errors->has('poster'))
-                                <span class="help-block"><strong>{{ $errors->first('poster') }}</strong></span>
-                            @endif
-                        </div>
+                {{--YEAR--}}
+                <div class="form-group{{ $errors->has('year') ? ' has-error' : '' }}">
+                    {!! Form::label('year', 'Year', ['class' => 'col-md-4 control-label']) !!}
+                    <div class="col-md-6">
+                        {!! Form::select('year', [], date('Y'), ['class' => 'form-control', 'id'=>'year']) !!}
+                    @if ($errors->has('title'))
+                            <span class="help-block"><strong>{{ $errors->first('year') }}</strong></span>
+                        @endif
                     </div>
+                </div>
 
-                    <div class="form-group{{ $errors->has('duration') ? ' has-error' : '' }}">
-                        <label for="duration" class="col-md-4 control-label">Duration</label>
-                        <div class="col-md-6">
-                            <input id="duration" type="time" class="form-control" name="duration" value="00:00">
-                            @if ($errors->has('duration'))
-                                <span class="help-block"><strong>{{ $errors->first('duration') }}</strong></span>
-                            @endif
-                        </div>
+                {{--POSTER--}}
+                <div class="form-group{{ $errors->has('poster') ? ' has-error' : '' }}">
+                    {!! Form::label('poster', 'Poster image', ['class' => 'col-md-4 control-label']) !!}
+                    <div class="col-md-6">
+                        {!! Form::file('poster', '', ['class' => 'form-control', 'id'=>'poster'])!!}
+                        @if ($errors->has('poster'))
+                            <span class="help-block"><strong>{{ $errors->first('poster') }}</strong></span>
+                        @endif
                     </div>
+                </div>
 
-                    <div class="form-group{{ $errors->has('genre') ? ' has-error' : '' }}">
-                        <label for="genre" class="col-md-4 control-label">Genre</label>
-                        <span>(ctrl or cmd click for multiple selection)</span>
-                        <div class="col-md-6">
-                            <select id="genre" class="form-control" name="genre" value="" multiple>
-                            <option value=",">All</option>
-                            <option value="Action">Action</option>
-                            <option value="Adventure">Adventure</option>
-                            <option value="Animation">Animation</option>
-                            <option value="Biography">Biography</option>
-                            <option value="Comedy">Comedy</option>
-                            <option value="Crime">Crime</option>
-                            <option value="Documentary">Documentary</option>
-                            <option value="Drama">Drama</option>
-                            <option value="Family">Family</option>
-                            <option value="Fantasy">Fantasy</option>
-                            <option value="Film">Film-Noir</option>
-                            <option value="History">History</option>
-                            <option value="Horror">Horror</option>
-                            <option value="Music">Music</option>
-                            <option value="Musical">Musical</option>
-                            <option value="Mystery">Mystery</option>
-                            <option value="Romance">Romance</option>
-                            <option value="Sci">Sci-Fi</option>
-                            <option value="Sport">Sport</option>
-                            <option value="Thriller">Thriller</option>
-                            <option value="War">War</option>
-                            <option value="Western">Western</option>
-                            </select>
-                            @if ($errors->has('genre'))
-                                <span class="help-block"><strong>{{ $errors->first('genre') }}</strong></span>
-                            @endif
-                        </div>
+                {{--DURATION--}}
+                <div class="form-group{{ $errors->has('duration') ? ' has-error' : '' }}">
+                    {!! Form::label('duration', 'Duration', ['class' => 'col-md-4 control-label']) !!}
+                    <div class="col-md-6">
+                        {!! Form::time('duration', '00:00', ['class' => 'form-control', 'id'=>'duration']) !!}
+                        @if ($errors->has('duration'))
+                            <span class="help-block"><strong>{{ $errors->first('duration') }}</strong></span>
+                        @endif
                     </div>
+                </div>
 
-                    <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
-                        <label for="date" class="col-md-4 control-label">Date</label>
-                        <div class="col-md-6">
-                            <input id="date" type="date" class="form-control" name="date" value="{{date('Y-m-d')}}">
-                            @if ($errors->has('date'))
-                                <span class="help-block"><strong>{{ $errors->first('date') }}</strong></span>
-                            @endif
-                        </div>
+                {{--GENRE--}}
+                <div class="form-group{{ $errors->has('genre') ? ' has-error' : '' }}">
+                    {!! Form::label('genre', 'Genre', ['class' => 'col-md-4 control-label']) !!}
+                    <span class="col-lg-4">(ctrl or cmd click for multiple selection)</span>
+                    <div class="col-md-6">
+                        <?php $genreslist2 = \App\Genre::pluck('genre', 'id'); ?>
+                            {{ Form::select('genre[]', $genreslist2,  1, ['multiple'=>'multiple', 'class' => 'form-control', 'id'=>'genre', 'value' => '1' ]) }}
+                        @if ($errors->has('genre'))
+                            <span class="help-block"><strong>{{ $errors->first('genre') }}</strong></span>
+                        @endif
                     </div>
+                </div>
 
-                    <div class="form-group{{ $errors->has('director') ? ' has-error' : '' }}">
-                        <label for="director" class="col-md-4 control-label">Director</label>
-                        <div class="col-md-6">
-                            <input id="director" type="text" class="form-control" name="director">
-                            @if ($errors->has('director'))
-                                <span class="help-block"><strong>{{ $errors->first('director') }}</strong></span>
-                            @endif
-                        </div>
+                {{--DURATION--}}
+                <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
+                    {!! Form::label('date', 'Date', ['class' => 'col-md-4 control-label']) !!}
+                    <div class="col-md-6">
+                        {!! Form::date('date', date('Y-m-d'), ['class' => 'form-control', 'id'=>'date']) !!}
+                        @if ($errors->has('date'))
+                            <span class="help-block"><strong>{{ $errors->first('date') }}</strong></span>
+                        @endif
                     </div>
+                </div>
 
-                    <div class="form-group{{ $errors->has('stars') ? ' has-error' : '' }}">
-                        <label for="stars" class="col-md-4 control-label">Stars</label>
-                        <div class="col-md-6">
-                            <input id="stars" type="text" class="form-control" name="stars">
-                            @if ($errors->has('stars'))
-                                <span class="help-block"><strong>{{ $errors->first('stars') }}</strong></span>
-                            @endif
-                        </div>
+                {{--DIRECTOR--}}
+                <div class="form-group{{ $errors->has('director') ? ' has-error' : '' }}">
+                    {!! Form::label('director', 'Director', ['class' => 'col-md-4 control-label']) !!}
+                    <div class="col-md-6">
+                        {!! Form::text('director', 'Jhon Doe', ['class' => 'form-control', 'id'=>'director']) !!}
+                        @if ($errors->has('director'))
+                            <span class="help-block"><strong>{{ $errors->first('director') }}</strong></span>
+                        @endif
                     </div>
+                </div>
 
-                    <div class="form-group{{ $errors->has('trailer url') ? ' has-error' : '' }}">
-                        <label for="trailer url" class="col-md-4 control-label">Trailer url</label>
-                        <div class="col-md-6">
-                            <input id="trailer url" type="url" class="form-control" name="trailer url">
-                            @if ($errors->has('trailer url'))
-                                <span class="help-block"><strong>{{ $errors->first('trailer url') }}</strong></span>
-                            @endif
-                        </div>
+                {{--STARS--}}
+                <div class="form-group{{ $errors->has('stars') ? ' has-error' : '' }}">
+                    {!! Form::label('stars', 'Stars', ['class' => 'col-md-4 control-label']) !!}
+                    <div class="col-md-6">
+                        {!! Form::text('stars', 'Jhon Doe, Jane Doe', ['class' => 'form-control', 'id'=>'stars']) !!}
+                        @if ($errors->has('stars'))
+                            <span class="help-block"><strong>{{ $errors->first('stars') }}</strong></span>
+                        @endif
                     </div>
+                </div>
 
-                    <div class="form-group{{ $errors->has('storyline') ? ' has-error' : '' }}">
-                        <label for="storyline" class="col-md-4 control-label">Storyline</label>
-                        <div class="col-md-6">
-                            <textarea id="storyline" type="url" class="form-control" name="storyline"></textarea>
-                            @if ($errors->has('storyline'))
-                                <span class="help-block"><strong>{{ $errors->first('storyline') }}</strong></span>
-                            @endif
-                        </div>
+                {{--TRAILER URL--}}
+                <div class="form-group{{ $errors->has('trailer') ? ' has-error' : '' }}">
+                    {!! Form::label('trailer', 'Trailer url', ['class' => 'col-md-4 control-label']) !!}
+                    <span class="col-lg-4">(Must be a youtube link)</span>
+                    <div class="col-md-6">
+                        {!! Form::url('trailer', 'https://', ['class' => 'form-control', 'id'=>'trailer']) !!}
+                        @if ($errors->has('trailer'))
+                            <span class="help-block"><strong>{{ $errors->first('trailer') }}</strong></span>
+                        @endif
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <div class="col-md-6 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary">
-                                Add movie
-                            </button>
-                        </div>
+                {{--STORYLINE--}}
+                <div class="form-group{{ $errors->has('storyline') ? ' has-error' : '' }}">
+                    {!! Form::label('storyline', 'Storyline', ['class' => 'col-md-4 control-label']) !!}
+                    <div class="col-md-6">
+                        {!! Form::textarea('storyline', 'In A world...', ['class' => 'form-control', 'id'=>'storyline']) !!}
+                        @if ($errors->has('storyline'))
+                            <span class="help-block"><strong>{{ $errors->first('storyline') }}</strong></span>
+                        @endif
                     </div>
-                </form>
-                {{ Form::open(array('url' => 'foo/bar')) }}
-                //
-                {{ Form::close() }}
+                </div>
+
+                {{--SUBMIT--}}
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-6">
+                        {!! Form::submit('Add movie', ['class' => 'btn btn-primary']) !!}
+                    </div>
+                </div>
+
+                {!! Form::close() !!}
             </div>
-            </div>
-        </div>
         </div>
     </div>
+    </section>
 @endsection

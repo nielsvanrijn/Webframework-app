@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <section id="overview">
     <div class="container">
         <div class="row">
             <h1>Overview</h1>
@@ -12,7 +13,7 @@
                     <li class="dropdown">
                         <button class="dropdown-toggle" data-toggle="dropdown">Genre <i class="fa fa-caret-down"></i></button>
                         <ul class="generes dropdown-menu" role="menu">
-                            @foreach(\App\Genres::all() as $genre)
+                            @foreach(\App\Genre::all() as $genre)
                                 <li class="ajax" data-id="{{$genre->id}}">{{$genre->genre}}</li>
                             @endforeach
                         </ul>
@@ -26,4 +27,5 @@
         </div>
         <div class="loading"></div>
     </div>
+    </section>
 @endsection

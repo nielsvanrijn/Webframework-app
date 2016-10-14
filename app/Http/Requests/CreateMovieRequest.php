@@ -32,8 +32,7 @@ class CreateMovieRequest extends FormRequest
             'date' => 'date',
             'director' => '',
             'stars' => '',
-            'photos' => '',
-            'trailer' => '',
+            'trailer' => 'url',
             'storyline' => '',
         ];
     }
