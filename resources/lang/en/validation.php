@@ -100,6 +100,7 @@ return [
             'rule-name' => 'custom-message',
         ],
     ],
+    'is_youtube_link' => 'The :attribute must be a youtube link',
 
     /*
     |--------------------------------------------------------------------------

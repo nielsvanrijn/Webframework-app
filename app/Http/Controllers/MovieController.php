@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Genre;
+use App\Http\Requests\UpdateMovieRequest;
 use App\Movie;
 use App\Http\Requests;
 use App\Http\Requests\CreateMovieRequest;
@@ -68,7 +69,7 @@ class MovieController extends Controller
         $newmovie->director = $request->director;
         $newmovie->stars = $request->stars;
         if(!$request->trailer == ""){
-            $newmovie->trailer = $request->all();
+            $newmovie->trailer = $request->trailer;
         }
         $newmovie->storyline = $request->storyline;
 
@@ -89,10 +90,53 @@ class MovieController extends Controller
 
     //MOVIE DETAIL
     public function detail($movie_id){
-        $movie = Movie::where('id', '=', "$movie_id")->first();
+        $movie = Movie::findOrFail($movie_id);
         $genre_id = Movie_Genre::where('movie_id', '=', $movie->id)->pluck('genre_id');
 
         return view('detail', compact('movie', 'genre_id'));
+    }
 
+    //MOVIE DELETE
+    public function destroy($movie_id){
+        Movie_Genre::where('movie_id', '=', $movie_id)->delete();
+        Movie::findOrFail($movie_id)->delete();
+
+        return redirect('/');
+    }
+
+    //MOVIE UPDATE / EDIT
+    public function editmovie(UpdateMovieRequest $request){
+        return $request->all();
+
+        $movie = Movie::find($id);
+        $movie->title = $request->title;
+        $movie->year = $request->year;
+        $movie->duration = $request->duration;
+        $movie->date = $request->date;
+        $movie->director = $request->director;
+        $movie->stars = $request->stars;
+        if(!$request->trailer == ""){
+            $movie->trailer = $request->trailer;
+        }
+        $movie->storyline = $request->storyline;
+
+
+        if ($request->hasFile('poster')) {
+
+            $poster = $request->file('poster');
+            $filename = time() . '.' . $poster->getClientOriginalExtension();
+            Image::make($poster)->resize(178, 257)->save( public_path('/uploads/posters/' . $filename) );
+
+            $movie->poster = $filename;
+        }
+        $movie->save();
+
+        $movie->genres()->sync($request->genre);
+
+
+        $movie = Movie::findOrFail($movie_id);
+        $genre_id = Movie_Genre::where('movie_id', '=', $movie->id)->pluck('genre_id');
+
+        return view('detail', compact('movie', 'genre_id'));
     }
 }

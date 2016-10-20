@@ -36,13 +36,15 @@ Route::group(['middleware' => ['auth']], function(){
     //add a movie
     Route::get('/addmovie', 'MovieController@moviecreate');
     Route::post('/addmovie', 'MovieController@moviestore');
+
+    //Edit movie
+    Route::post('/edit', 'MovieController@editmovie');
 });
 
 //MODERATOR REQUIRED
 Route::group(['middleware' => ['mod']], function(){
-
     Route::get('/mod', function(){echo "you have acces";});
-
+    Route::delete('/delete/{movie_id}', 'MovieController@destroy');
 });
 
 //Catch anything that isn't listed

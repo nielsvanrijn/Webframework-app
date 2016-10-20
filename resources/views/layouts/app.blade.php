@@ -82,8 +82,8 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
-    <script src="js/ajax-sort.js"></script>
-    <script src="js/addmovie.js"></script>
+    <script src="/js/ajax-sort.js"></script>
+    <script src="/js/main.js"></script>
 
 </body>
 </html>
