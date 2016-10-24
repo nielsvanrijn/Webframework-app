@@ -135,6 +135,7 @@
 #moviedetail .movie_poster{
     width: 356px;
     height: 514px;
+    margin: 0 0 2em 0;
 }
 
 #moviedetail #info {
@@ -162,6 +163,17 @@
     margin-top: 0;
 }
 
-#moviedetail div[class^="form"]{
+#moviedetail #form{
     display: none;
+}
+#moviedetail #editingdone{
+    display: none;
+}
+
+#moviedetail #genre option{
+    float: left;
+    margin: 0 5px;
+}
+#moviedetail .form-group span{
+    font-weight: normal;
 }

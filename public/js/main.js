@@ -25,10 +25,23 @@ function detail(){
         return confirm("Do you want to delete this item?");
     });
 
-    //On double click show form
-    $('#form').on('dblclick', function(e){
-        console.log(e);
-        $(e.target).hide();
-        $(e.target.parentElement.children[2]).show();
+    //On click show & hide form
+    $('#editmovie').on('click', function() {
+        $(this).fadeOut();
+
+        $('#info').fadeOut();
+        $('#form').fadeIn();
+        console.log($('#year').val());
+        //add years to the list and set the default value to prevous year
+        for (var i = new Date().getFullYear() + 20; i > 1849; i--) {
+            $('#year').append($('<option/>').val(i).html(i));
+        };
+        $('#year').val($('#year').data().year);
     });
+    $('#canceledit').on('click', function() {
+        $('#editmovie').fadeIn();
+        $('#form').fadeOut();
+        $('#info').fadeIn();
+    });
+
 }

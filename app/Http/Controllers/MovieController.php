@@ -78,7 +78,7 @@ class MovieController extends Controller
 
             $poster = $request->file('poster');
             $filename = time() . '.' . $poster->getClientOriginalExtension();
-            Image::make($poster)->resize(178, 257)->save( public_path('/uploads/posters/' . $filename) );
+            Image::make($poster)->resize(356, 514)->save( public_path('/uploads/posters/' . $filename) );
 
             $newmovie->poster = $filename;
         }
@@ -106,9 +106,9 @@ class MovieController extends Controller
 
     //MOVIE UPDATE / EDIT
     public function editmovie(UpdateMovieRequest $request){
-        return $request->all();
+        //return $request->all();
 
-        $movie = Movie::find($id);
+        $movie = Movie::find($request->movie_id);
         $movie->title = $request->title;
         $movie->year = $request->year;
         $movie->duration = $request->duration;
@@ -125,7 +125,7 @@ class MovieController extends Controller
 
             $poster = $request->file('poster');
             $filename = time() . '.' . $poster->getClientOriginalExtension();
-            Image::make($poster)->resize(178, 257)->save( public_path('/uploads/posters/' . $filename) );
+            Image::make($poster)->resize(356, 514)->save( public_path('/uploads/posters/' . $filename) );
 
             $movie->poster = $filename;
         }
@@ -134,9 +134,10 @@ class MovieController extends Controller
         $movie->genres()->sync($request->genre);
 
 
-        $movie = Movie::findOrFail($movie_id);
+        $movie = Movie::findOrFail($request->movie_id);
         $genre_id = Movie_Genre::where('movie_id', '=', $movie->id)->pluck('genre_id');
 
-        return view('detail', compact('movie', 'genre_id'));
+        //return redirect('detail', compact('movie', 'genre_id'));
+        return redirect("detail/$movie->id")->with('movie', 'genre_id');
     }
 }

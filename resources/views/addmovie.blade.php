@@ -24,7 +24,7 @@
                     {!! Form::label('year', 'Year', ['class' => 'col-md-4 control-label']) !!}
                     <div class="col-md-6">
                         {!! Form::select('year', [], date('Y'), ['class' => 'form-control', 'id'=>'year']) !!}
-                    @if ($errors->has('title'))
+                    @if ($errors->has('year'))
                             <span class="help-block"><strong>{{ $errors->first('year') }}</strong></span>
                         @endif
                     </div>
@@ -65,7 +65,7 @@
                     </div>
                 </div>
 
-                {{--DURATION--}}
+                {{--DATE--}}
                 <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
                     {!! Form::label('date', 'Date', ['class' => 'col-md-4 control-label']) !!}
                     <div class="col-md-6">
