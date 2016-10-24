@@ -39,14 +39,18 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'IMD2') }}
+                    <div class="logo"></div>
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    &nbsp;
+                    <li>
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            Home
+                        </a>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

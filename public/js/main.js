@@ -19,9 +19,19 @@ function addmovie(){
 }
 
 function detail(){
+    //Check voor postback en laat form zien al true
+    $('#form')
+    if($('#form').hasClass("postback")){
+        $('#info').fadeOut();
+        $('#form').fadeIn();
+        //add years to the list and set the default value to prevous year
+        for (var i = new Date().getFullYear() + 20; i > 1849; i--) {
+            $('#year').append($('<option/>').val(i).html(i));
+        };
+        $('#year').val($('#year').data().year);
+    };
     //Delete movie
-    var deletemovie = $('.btn-danger')[0];
-    $(deletemovie).on("click", function(){
+    $('#deletemovie').on("click", function(){
         return confirm("Do you want to delete this item?");
     });
 
@@ -38,10 +48,14 @@ function detail(){
         };
         $('#year').val($('#year').data().year);
     });
+    //Cancel editing the movie
     $('#canceledit').on('click', function() {
         $('#editmovie').fadeIn();
         $('#form').fadeOut();
         $('#info').fadeIn();
     });
-
+    //Show trailer on click
+    $('#watchtrailer').on('click', function() {
+        $('#ytplayer').fadeIn();
+    });
 }

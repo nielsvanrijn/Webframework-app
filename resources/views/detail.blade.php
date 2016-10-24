@@ -2,8 +2,8 @@
 
 @section('content')
     <section id="moviedetail">
-    @if (strpos($movie->trailer, 'youtube.com') !== false || strpos($movie->trailer, 'youtu.be') !== false)
-            {{ $ytcode = substr($movie->trailer, -11) }}
+    @if (!$movie->trailer == "")
+            <?php $ytcode = substr($movie->trailer, -11) ?>
         <iframe id="ytplayer" type="text/html" width="100%" height="500px"
                 src="https://www.youtube.com/embed/{{$ytcode}}?autoplay=0&controls=0&showinfo=0&rel=0?iv_load_policy=3?modestbranding=1"
                 frameborder="0">
@@ -14,11 +14,11 @@
             <div class="col-md-4">
                 <div class="movie_poster" style="background: #9d9d9d url('/uploads/posters/{{ $movie->poster }}') no-repeat center / cover;"></div>
                 @if (Auth::user()['mod'] == '1')
-                    <a href='{{url('/delete')}}/{{$movie->id}}'><button class="btn btn-danger">Remove movie</button></a>
+                    <a href='{{url('/delete')}}/{{$movie->id}}'><button id="deletemovie" class="btn btn-danger">Remove movie</button></a>
                 @endif
                 <button id="editmovie" class="btn btn-warning">Edit movie</button>
             </div>
-            <div id="form" class="col-md-8">
+            <div id="form" class="col-md-8 @if(strlen($errors->first()) > 0)postback @endif">
                 {!! Form::open(array('class' => 'form-horizontal', 'role' => 'form', 'method' => 'POST', 'action' => 'MovieController@editmovie', 'files' => true)) !!}
 
                 {{ Form::hidden('movie_id', $movie->id) }}
@@ -130,7 +130,7 @@
                 <div class="form-group{{ $errors->has('storyline') ? ' has-error' : '' }}">
                     {!! Form::label('storyline', 'Storyline', ['class' => 'col-md-2 control-label']) !!}
                     <div class="col-md-6">
-                        {!! Form::textarea('storyline', $movie->storyline, ['class' => 'form-control', 'id'=>'storyline']) !!}
+                        {!! Form::textarea('storyline', $movie->storyline, ['class' => 'form-control', 'id'=>'storyline', 'rows' => '5']) !!}
                         @if ($errors->has('storyline'))
                             <span class="help-block"><strong>{{ $errors->first('storyline') }}</strong></span>
                         @endif
@@ -165,6 +165,11 @@
                 <h5>{{$movie->stars}}</h5>
                 <h4>Synopsis</h4>
                 <h5>{{$movie->storyline}}</h5>
+                @if (!$movie->trailer == "")
+                    <button id="watchtrailer" class="btn btn-primary">Watch trailer</button>
+                @else
+                    <button class="btn disabled">No trailer</button>
+                @endif
             </div>
         </div>
     </div>
