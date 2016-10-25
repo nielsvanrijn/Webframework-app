@@ -33,12 +33,14 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/profile', 'UserController@profile');
     Route::post('/profile', 'UserController@update_avatar');
 
-    //add a movie
-    Route::get('/addmovie', 'MovieController@moviecreate');
-    Route::post('/addmovie', 'MovieController@moviestore');
+    Route::group(['middleware' => ['activeuser']], function() {
+        //add a movie
+        Route::get('/addmovie', 'MovieController@moviecreate');
+        Route::post('/addmovie', 'MovieController@moviestore');
 
-    //Edit movie
-    Route::post('/editmovie', 'MovieController@editmovie');
+        //Edit movie
+        Route::post('/editmovie', 'MovieController@editmovie');
+    });
 });
 
 //MODERATOR REQUIRED

@@ -54,5 +54,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'mod' => \App\Http\Middleware\ModMiddleware::class,
         'ajax' => \App\Http\Middleware\OnlyAjax::class,
+        'activeuser' => \App\Http\Middleware\ActiveUser::class,
     ];
 }
