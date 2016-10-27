@@ -76,7 +76,7 @@
                     </div>
                 </div>
 
-                {{--DIRECTOR--}}
+                {{--DIRECTOR--}}f
                 <div class="form-group{{ $errors->has('director') ? ' has-error' : '' }}">
                     {!! Form::label('director', 'Director', ['class' => 'col-md-4 control-label']) !!}
                     <div class="col-md-6">

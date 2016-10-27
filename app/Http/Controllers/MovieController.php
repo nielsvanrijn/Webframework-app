@@ -14,19 +14,23 @@ use Image;
 
 class MovieController extends Controller
 {
-    //default
+    // DEFAULT PAGE SHOW
     public function index(){
         return view('index');
     }
 
-    //default movie list
+    //--------------------------
+    //     DEFAULT MOVIE LIST
+    //--------------------------
     public function sort_default(){
         //Load all movies by title ascending
         $movies = Movie::orderBy('title', 'ASC')->get();
 
         return view('movies', compact('movies') );
     }
-    //dynamic sort
+    //--------------------------
+    //     DYNAMIC SORT
+    //--------------------------
     public function sort($what, $how, $genre_id){
         //Get the movie_id's where genre matches
         $moviesByGenre = Movie_Genre::where('genre_id', '=', $genre_id)->get();
@@ -52,12 +56,17 @@ class MovieController extends Controller
         return view('movies', compact('movies'));
     }
 
-    // SHOW ADDMOVIE FORM
+    //--------------------------
+    //     SHOW ADDMOVIE FORM
+    //--------------------------
     protected function moviecreate()
     {
         return view('addmovie');
     }
+
+    //--------------------------
     // STORE MOVIE IN DATABASE
+    //--------------------------
     public function moviestore(CreateMovieRequest $request){
         //return $request->all();
 
@@ -88,7 +97,9 @@ class MovieController extends Controller
         return redirect('/');
     }
 
-    //MOVIE DETAIL
+    //--------------------------
+    //     MOVIE DETAIL
+    //--------------------------
     public function detail($movie_id){
         $movie = Movie::findOrFail($movie_id);
         $genre_id = Movie_Genre::where('movie_id', '=', $movie->id)->pluck('genre_id');
@@ -96,7 +107,9 @@ class MovieController extends Controller
         return view('detail', compact('movie', 'genre_id'));
     }
 
-    //MOVIE DELETE
+    //--------------------------
+    //    MOVIE DELETE
+    //--------------------------
     public function destroy($movie_id){
         Movie_Genre::where('movie_id', '=', $movie_id)->delete();
         Movie::findOrFail($movie_id)->delete();
@@ -104,7 +117,9 @@ class MovieController extends Controller
         return redirect('/');
     }
 
-    //MOVIE UPDATE / EDIT
+    //--------------------------
+    //    MOVIE UPDATE / EDIT
+    //--------------------------
     public function editmovie(UpdateMovieRequest $request){
         //return $request->all();
 
@@ -113,6 +128,7 @@ class MovieController extends Controller
         $movie->year = $request->year;
         $movie->duration = $request->duration;
         $movie->date = $request->date;
+
         $movie->director = $request->director;
         $movie->stars = $request->stars;
         if(!$request->trailer == ""){
@@ -139,5 +155,20 @@ class MovieController extends Controller
 
         //return redirect('detail', compact('movie', 'genre_id'));
         return redirect("detail/$movie->id")->with('movie', 'genre_id');
+    }
+
+    //--------------------------
+    //    SEARCH FUNCTION
+    //--------------------------
+    public function seachmovie($what){
+
+        if($what == "*"){
+            $movies = Movie::orderBy('title', 'ASC')->get();
+        } else {
+            $movies = Movie::where('title', 'LIKE', '%'.$what.'%')->get();
+            $array = [$what, $movies];
+            //return $movies;
+        }
+        return view('movies', compact('movies'));
     }
 }

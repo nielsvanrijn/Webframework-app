@@ -9,7 +9,16 @@
                                 OVERVIEW
 ============================================================================= */
 .navbar-brand{padding: 0; margin-right: 1em}
-.logo{width: 85px;height:50px;background: transparent url('../assets/logo.png') no-repeat center / contain}
+.logo{width: 85px;height:50px;background: transparent url('../assets/logo.png') no-repeat center / contain;
+    -webkit-transition: 250ms;
+    -moz-transition: 250ms;
+    -ms-transition: 250ms;
+    -o-transition: 250ms;
+    transition: 250ms;
+}
+.logo:hover{
+    filter:brightness(110%);
+}
 #overview .loading {
     background: rgba(255,255,255,0.9) url('../assets/loading.gif') no-repeat center 65%;
     height: 100px;
@@ -67,6 +76,10 @@
 #overview #sortbar #addmovie{
     float: right;
     margin-right: 40px;
+}
+
+#overview #sortbar #addmovie li{
+    float: left;
 }
 
 #overview .movie_item{
@@ -179,3 +192,7 @@
 #moviedetail .form-group span{
     font-weight: normal;
 }
+/* =============================================================================
+                                DASHBOARD
+============================================================================= */
+

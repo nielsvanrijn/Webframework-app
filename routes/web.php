@@ -16,6 +16,7 @@ Auth::routes();
 // home
 Route::get('/', 'MovieController@index');
 Route::get('/detail/{movie_id}', 'MovieController@detail');
+Route::get('/search/{what}', 'MovieController@seachmovie');
 
 // movies sort ajax only
 Route::group(['middleware' => ['ajax']], function(){
@@ -45,8 +46,8 @@ Route::group(['middleware' => ['auth']], function(){
 
 //MODERATOR REQUIRED
 Route::group(['middleware' => ['mod']], function(){
-    Route::get('/mod', function(){echo "you have acces";});
     Route::get('/delete/{movie_id}', 'MovieController@destroy');
+    Route::post('/toggleadmin', 'UserController@toggleadmin');
 });
 
 //Catch anything that isn't listed

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -30,5 +31,19 @@ class UserController extends Controller
 
         return view('profile', array('user' => Auth::user()) );
 
+    }
+    public function toggleadmin(Request $request){
+        $user = User::where('email', '=', $request->email)->first();
+
+        if($request->state == "false") {
+            $user->mod = 0;
+        }else{
+            $user->mod = 1;
+        }
+        $user->save();
+
+        $array = [$user, $user->mod, $request->email, $request->state];
+
+        return $array;
     }
 }

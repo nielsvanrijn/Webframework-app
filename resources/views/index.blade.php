@@ -3,6 +3,7 @@
 @section('content')
     <section id="overview">
     <div class="container">
+        <div id="response"></div>
         <div class="row">
             <h1>Overview</h1>
             <nav id="sortbar">
@@ -21,6 +22,9 @@
                 </ul>
                 <ul id="addmovie">
                     <li><a href="{{ url('/addmovie') }}"><button><i class="fa fa-plus"></i> Add a movie</button></a></li>
+                    <li>
+                        <input id="search" type="text" placeholder="search">
+                    </li>
                 </ul>
             </nav>
             <div id="movie_list"></div>

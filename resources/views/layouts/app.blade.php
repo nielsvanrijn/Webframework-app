@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/bootstrap-switch.min.css" rel="stylesheet">
 
     <!--libraries-->
     <link href="/css/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet">
@@ -86,6 +87,7 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    <script src="/js/bootstrap-switch.min.js"></script>
     <script src="/js/ajax-sort.js"></script>
     <script src="/js/main.js"></script>
 
