@@ -22,9 +22,7 @@ function index(){
     var word = []
 
     $('#search').keyup(function(e) {
-        console.log(e)
-        var test = $('.ajax active');
-        console.log(test);
+        var genre_id = $(e.target.parentElement.parentElement.parentElement.children["0"].children[3].children[1]).find('.active')[0].dataset.id;
         if( (e.keyCode >= 65 && e.keyCode <= 90) || (e.keyCode >= 8 && e.keyCode <= 46) ) {
             //var what = e.key;
             //word.push(what);
@@ -39,16 +37,16 @@ function index(){
 
             $.ajax({
                 type: 'GET',
-                url: '/search/' + word,
+                url: '/search/' + word + "/" + genre_id,
                 success: function (data) {
-                    console.log('/search/' + word);
-                    console.log(data);
                     $('#movie_list').hide().html(data).fadeIn();
+                    console.log('/search/' + word + "/" + genre_id);
+                    console.log(data);
                 },
                 error: function (data) {
-                    console.log(data);
-                    //var response = $('#response')[0];
-                    //response.innerHTML = data.responseText;
+                    //console.log(data);
+                    var response = $('#response')[0];
+                    response.innerHTML = data.responseText;
                 }
             });
         }

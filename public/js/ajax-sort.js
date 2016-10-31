@@ -13,6 +13,8 @@ $(document).ready(function(){
         url: url + "default",
         success: function (data) {
             $('#movie_list').hide().html(data).fadeIn();
+            var all = $('#genrelist')[0];
+            $(all.children["0"]).addClass('active');
         },
         error: function (data) {
             console.log('Error:', data);

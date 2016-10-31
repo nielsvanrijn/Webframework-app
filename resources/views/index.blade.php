@@ -13,7 +13,7 @@
                     <li><button class="ajax" value="DESC">Rating <i class="fa fa-sort-numeric-asc"></i><i class="hide fa fa-sort-numeric-desc"></i></button></li>
                     <li class="dropdown">
                         <button class="dropdown-toggle" data-toggle="dropdown">Genre <i class="fa fa-caret-down"></i></button>
-                        <ul class="generes dropdown-menu" role="menu">
+                        <ul id="genrelist" class="generes dropdown-menu" role="menu">
                             @foreach(\App\Genre::all() as $genre)
                                 <li class="ajax" data-id="{{$genre->id}}">{{$genre->genre}}</li>
                             @endforeach

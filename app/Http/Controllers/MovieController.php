@@ -160,15 +160,26 @@ class MovieController extends Controller
     //--------------------------
     //    SEARCH FUNCTION
     //--------------------------
-    public function seachmovie($what){
+    public function seachmovie($what, $genre_id){
 
-        if($what == "*"){
+        if($genre_id != 1){
+            //Get the movie_id's where genre matches
+            $moviesByGenre = Movie_Genre::where('genre_id', '=', $genre_id)->get();
+
+            //create empty array
+            $movieCollection = [];
+            //loop trouhg all movies where the previous movie_id's match and put them in the array
+            foreach ($moviesByGenre as $movie) {
+                $movieCollection[] = Movie::where('id', '=', $movie->movie_id)->first();
+            }
+            $movies = Movie::where('title', 'LIKE', '%'.$what.'%')->get();
+        }
+        elseif($what == "*"){
             $movies = Movie::orderBy('title', 'ASC')->get();
         } else {
             $movies = Movie::where('title', 'LIKE', '%'.$what.'%')->get();
-            $array = [$what, $movies];
-            //return $movies;
         }
+        //return [$genre_id, $moviesByGenre, $movieCollection, $what, $movies];
         return view('movies', compact('movies'));
     }
 }

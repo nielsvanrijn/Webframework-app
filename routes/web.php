@@ -16,7 +16,7 @@ Auth::routes();
 // home
 Route::get('/', 'MovieController@index');
 Route::get('/detail/{movie_id}', 'MovieController@detail');
-Route::get('/search/{what}', 'MovieController@seachmovie');
+Route::get('/search/{what}/{genre_id}', 'MovieController@seachmovie');
 
 // movies sort ajax only
 Route::group(['middleware' => ['ajax']], function(){
